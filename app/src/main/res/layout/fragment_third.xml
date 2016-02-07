@@ -27,55 +27,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="100sp" />
+                android:textSize="90sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="30sp"
-                android:text="Region" />
+                android:text="Qualifications" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="10sp" />
 
-                <EditText
-                    android:id="@+id/state"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="State"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General Medical Care"
+                android:textSize="20sp"
+                android:id="@+id/woundCare"
+                android:layout_gravity="center_horizontal" />
 
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heimlich"
+                android:textSize="20sp"
+                android:id="@+id/heimlich"
+                android:layout_gravity="center_horizontal" />
 
-                <EditText
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="City"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recovery Position"
+                android:textSize="20sp"
+                android:id="@+id/recoveryPosition"
+                android:layout_gravity="center_horizontal" />
 
-            </android.support.design.widget.TextInputLayout>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CPR"
+                android:textSize="20sp"
+                android:id="@+id/cpr"
+                android:layout_gravity="center_horizontal" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AED"
+                android:textSize="20sp"
+                android:id="@+id/aed"
+                android:layout_gravity="center_horizontal" />
+
 
             <Button
-                android:id="@+id/save1"
+                android:id="@+id/save2"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Save"
-                android:onClick="save1"
+                android:onClick="save2"
                 android:textStyle="bold" />
 
 

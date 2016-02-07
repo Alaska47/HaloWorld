@@ -1,5 +1,6 @@
 package com.example.mihir.haloworld;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -98,14 +101,49 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText ct = (EditText)findViewById(R.id.city);
         state=st.getText().toString();
         city=ct.getText().toString();
+        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void save2(View v) {
+        CheckBox wc = (CheckBox)findViewById(R.id.woundCare);
+        CheckBox h = (CheckBox)findViewById(R.id.heimlich);
+        CheckBox rp = (CheckBox)findViewById(R.id.recoveryPosition);
+        CheckBox cpr = (CheckBox)findViewById(R.id.cpr);
+        CheckBox aed = (CheckBox)findViewById(R.id.aed);
+        if(wc.isChecked())
+            quals+="1";
+        else
+            quals+="0";
+        if(h.isChecked())
+            quals+="1";
+        else
+            quals+="0";
+        if(rp.isChecked())
+            quals+="1";
+        else
+            quals+="0";
+        if(cpr.isChecked())
+            quals+="1";
+        else
+            quals+="0";
+        if(aed.isChecked())
+            quals+="1";
+        else
+            quals+="0";
+        Toast.makeText(getApplicationContext(), "Saved! Initiating app....", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(RegistrationActivity.this, ReportActivity.class);
+        startActivity(i);
+        finish();
     }
 
     public void angelVer(View v) {
         angel=true;
+        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
     }
 
     public void plebVer(View v) {
         angel=false;
+        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
     }
 
     /**

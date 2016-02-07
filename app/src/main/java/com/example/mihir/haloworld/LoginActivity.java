@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mNameView;
     private EditText mPhoneNumber;
+    private EditText mPassword;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mNameView = (AutoCompleteTextView) findViewById(R.id.fullname);
         populateAutoComplete();
 
-        mPhoneNumber = (EditText) findViewById(R.id.password);
+        mPhoneNumber = (EditText) findViewById(R.id.phonenumber);
         mPhoneNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -86,6 +87,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+        mPassword = (EditText)findViewById(R.id.password);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.register);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -160,6 +163,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         name = mNameView.getText().toString();
         phonenumber = mPhoneNumber.getText().toString();
+        password = mPassword.getText().toString();
 
         boolean cancel = false;
         View focusView = null;

@@ -35,8 +35,12 @@ public class RegistrationActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
     public String state;
     public String city;
+    public boolean angel;
+    public int range = 2;
+    public String quals = ";";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,14 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText ct = (EditText)findViewById(R.id.city);
         state=st.getText().toString();
         city=ct.getText().toString();
+    }
+
+    public void angelVer(View v) {
+        angel=true;
+    }
+
+    public void plebVer(View v) {
+        angel=false;
     }
 
     /**

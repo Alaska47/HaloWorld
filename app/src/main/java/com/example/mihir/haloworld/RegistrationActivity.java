@@ -71,7 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public int range = 2;
     public String quals = ";";
 
-
+    public String[] states = {"ALaska"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,18 +249,27 @@ public class RegistrationActivity extends AppCompatActivity {
         checkPlayServices();
     }
 
+    public boolean verify(View v) {
+
+        return true;
+    }
+
     public void angelVer(View v) {
-        angel=true;
-        mViewPager.setCurrentItem(2, true);
+        if(verify(v)) {
+            angel = true;
+            mViewPager.setCurrentItem(2, true);
+        }
     }
 
     public void plebVer(View v) {
-        angel=false;
-        registerInBackground();
-        Toast.makeText(getApplicationContext(), "Saved! Advancing to alert screen.", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(RegistrationActivity.this, ReportActivity.class);
-        startActivity(i);
-        finish();
+        if(verify(v)) {
+            angel = false;
+            registerInBackground();
+            Toast.makeText(getApplicationContext(), "Saved! Advancing to alert screen.", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(RegistrationActivity.this, ReportActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,6 +31,8 @@ public class ConfirmActivity extends AppCompatActivity {
 
     public static double latitude;
     public static double longitude;
+
+    public Intent i1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +55,21 @@ public class ConfirmActivity extends AppCompatActivity {
         Log.e("ANISH", "4");
 
 
-        LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
-        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
-        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                            startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                            dialog.cancel();
-                        }
-                    });
-            final AlertDialog alert = builder.create();
-            alert.show();
-        }
-        LocationListener locationListener = new MyLocationListener();
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 100,5, locationListener);
-        if(longitude != 0d && latitude != 0d) {
-            locationManager.removeUpdates(locationListener);
+        i1 =  new Intent(this, MyServiceUser.class);
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();             // set criteria for location provider:
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);   // fine accuracy
+        criteria.setCostAllowed(false);                 // no monetary cost
+
+        String bestProvider = locationManager.getBestProvider(criteria, false);
+        Log.e("b", bestProvider);
+        Location location = locationManager.getLastKnownLocation(bestProvider);
+
+        LatLng myPosition= new LatLng(location.getLatitude(), location.getLongitude());
+        if(myPosition ==null)
+        {
+            myPosition = new LatLng(38.818487, -77.168534);
         }
 
         Socket confirm = null;
@@ -92,8 +86,8 @@ public class ConfirmActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("e", "report," + LoginActivity.phonenumber + "," + longitude + ":" + latitude + "," + bad);
-        out.println("report," + LoginActivity.phonenumber + "," + longitude + ":" + latitude + "," + bad);
+
+        out.println("report," + LoginActivity.phonenumber + "," + myPosition.longitude + ":" + myPosition.latitude + "," + bad);
         try {
             confirm.close();
         } catch (IOException e) {
@@ -105,22 +99,6 @@ public class ConfirmActivity extends AppCompatActivity {
         Intent i = new Intent(this, ReportActivity.class);
         startActivity(i);
         finish();
+        stopService(i1);
     }
-}
-class MyLocationListener implements LocationListener {
-
-    @Override
-    public void onLocationChanged(Location loc) {
-        ConfirmActivity.latitude = loc.getLatitude();
-        ConfirmActivity.longitude = loc.getLongitude();
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {}
-
-    @Override
-    public void onProviderEnabled(String provider) {}
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {}
 }

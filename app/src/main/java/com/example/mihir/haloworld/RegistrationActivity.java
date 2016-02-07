@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class RegistrationActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public String state;
+    public String city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,13 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void save1(View v) {
+        EditText st = (EditText)findViewById(R.id.state);
+        EditText ct = (EditText)findViewById(R.id.city);
+        state=st.getText().toString();
+        city=ct.getText().toString();
     }
 
     /**

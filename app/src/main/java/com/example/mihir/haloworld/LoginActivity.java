@@ -63,6 +63,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    public String name;
+    public String phonenumber;
+    public String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,30 +158,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPhoneNumber.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mNameView.getText().toString();
-        String phoneNumber = mPhoneNumber.getText().toString();
+        name = mNameView.getText().toString();
+        phonenumber = mPhoneNumber.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(phoneNumber)) {
+        if (TextUtils.isEmpty(phonenumber)) {
             mPhoneNumber.setError(getString(R.string.error_field_required));
             focusView = mPhoneNumber;
             cancel = true;
         }
-        else if (!isPhoneNumberValid(phoneNumber)) {
+        else if (!isPhoneNumberValid(phonenumber)) {
             mPhoneNumber.setError("Not A Valid Phone Number! Must have 10 digits and no dashes!");
             focusView = mPhoneNumber;
             cancel = true;
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
             focusView = mNameView;
             cancel = true;
-        } else if (!isNameValid(email)) {
+        } else if (!isNameValid(name)) {
             mNameView.setError(getString(R.string.error_invalid_name));
             focusView = mNameView;
             cancel = true;
@@ -191,7 +195,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, phoneNumber);
+            mAuthTask = new UserLoginTask(name, phonenumber);
             mAuthTask.execute((Void) null);
         }
     }

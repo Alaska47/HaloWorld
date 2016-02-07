@@ -38,7 +38,7 @@
                     android:id="@+id/fullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Full Name"
+                    android:hint="First Name"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />

@@ -23,6 +23,7 @@
         android:text="Report an Emergency!"
         android:id="@+id/angry_btn"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="advance"/>
 
 </RelativeLayout>

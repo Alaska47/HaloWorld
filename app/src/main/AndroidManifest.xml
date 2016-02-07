@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -31,7 +32,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mihir.haloworld.LoginActivity" />
         </activity>
-        <activity android:name=".ReportActivity"></activity>
+        <activity android:name=".ReportActivity" />
+        <activity
+            android:name=".Question1Activity"
+            android:label="@string/title_activity_question1"
+            android:parentActivityName=".ReportActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mihir.haloworld.ReportActivity" />
+        </activity>
+        <activity android:name=".Question2Activity" />
+        <activity android:name=".Question31Activity" />
+        <activity android:name=".Question32Activity" />
+        <activity android:name=".ConfirmActivity" />
     </application>
 
 </manifest>

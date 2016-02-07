@@ -5,15 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ReportActivity extends AppCompatActivity {
+public class ConfirmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
+        setContentView(R.layout.activity_confirm);
     }
-    public void advance(View view) {
-        Intent i = new Intent(ReportActivity.this, Question1Activity.class);
+    public void reset(View view) {
+        Intent i = new Intent(ConfirmActivity.this, ReportActivity.class);
         startActivity(i);
         finish();
     }

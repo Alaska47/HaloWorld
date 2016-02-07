@@ -1,6 +1,8 @@
 package com.example.mihir.haloworld;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +24,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.gcm.*;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.Socket;
+
 public class RegistrationActivity extends AppCompatActivity {
+
+    GoogleCloudMessaging gcmObj;
+    public static String regId = "";
+
+    // Google Project Number
+    static final String GOOGLE_PROJ_ID = "574935733370";
+    // Message Key
+    static final String MSG_KEY = "m";
+
+    final String host = "71.62.99.75";
+    final int portNumber = 1337;
+
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,14 +67,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public String state;
     public String city;
-    public boolean angel;
+    public static boolean angel;
     public int range = 2;
     public String quals = ";";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,14 +93,6 @@ public class RegistrationActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
     }
 
@@ -101,7 +124,7 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText ct = (EditText)findViewById(R.id.city);
         state=st.getText().toString();
         city=ct.getText().toString();
-        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
+        mViewPager.setCurrentItem(1, true);
     }
 
     public void save2(View v) {
@@ -130,20 +153,114 @@ public class RegistrationActivity extends AppCompatActivity {
             quals+="1";
         else
             quals+="0";
+        registerInBackground();
+        Intent pushIntent = new Intent(this, MyService.class);
+        this.startService(pushIntent);
+
         Toast.makeText(getApplicationContext(), "Saved! Initiating app....", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(RegistrationActivity.this, ReportActivity.class);
         startActivity(i);
         finish();
     }
 
+    public String MD5(String md5) throws UnsupportedEncodingException {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes("UTF-8"));
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
+    }
+
+    private void registerInBackground() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+                    if (gcmObj == null) {
+                        gcmObj = GoogleCloudMessaging
+                                .getInstance(RegistrationActivity.this);
+                    }
+
+                    regId = gcmObj.register(GOOGLE_PROJ_ID);
+
+                    Socket register = new Socket(host, portNumber);
+                    PrintWriter out = new PrintWriter(register.getOutputStream(), true);
+
+                    if(angel) {
+                        out.println("register,a," + LoginActivity.phonenumber + "," + LoginActivity.name + "," + MD5(LoginActivity.password) + "," + state + " " + city + "," + range + "," + quals + "," + regId + "\n");
+                    } else {
+                        out.println("register,r," + LoginActivity.phonenumber + "," + LoginActivity.name + "," + MD5(LoginActivity.password) + "," + state + " " + city + "\n");
+                    }
+                    register.close();
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+                if (!regId.equals("")) {
+                    // Store RegId created by GCM Server in SharedPref
+
+                } else {
+                    Toast.makeText(
+                            RegistrationActivity.this,
+                            "Reg ID Creation Failed.Either you haven't enabled Internet or GCM server is busy right now. Make sure you enabled Internet and try registering again after some time."
+                                    + msg, Toast.LENGTH_LONG).show();
+                }
+            }
+        }.execute(null, null, null);
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(this);
+        // When Play services not found in device
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                // Show Error dialog to install Play services
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "This device doesn't support Play services. App will not work normally",
+                        Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        } else {}
+        return true;
+    }
+
+    // When Application is resumed, check for Play services support to make sure
+    // app will be running normally
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayServices();
+    }
+
     public void angelVer(View v) {
         angel=true;
-        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
+        mViewPager.setCurrentItem(2, true);
     }
 
     public void plebVer(View v) {
         angel=false;
-        Toast.makeText(getApplicationContext(), "Saved! Swipe right to advance.", Toast.LENGTH_SHORT).show();
+        registerInBackground();
+        Toast.makeText(getApplicationContext(), "Saved! Advancing to alert screen.", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(RegistrationActivity.this, ReportActivity.class);
+        startActivity(i);
+        finish();
     }
 
     /**

@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="100sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,6 +35,11 @@
                 android:gravity="center"
                 android:textSize="30sp"
                 android:text="What are you?" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,6 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:text="Plebian"
+                    android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
                     android:onClick="plebVer"/>
@@ -69,6 +75,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:text="Angel"
+                    android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
                     android:onClick="angelVer"/>

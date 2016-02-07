@@ -8,10 +8,16 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.Manifest;
 
 public class StartUpActivity extends AppCompatActivity {
 
-    SharedPreferences prefs = null;
+    public static SharedPreferences prefs = null;
+
+    private static final String[] LOCATION_PERMS={
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,7 @@ public class StartUpActivity extends AppCompatActivity {
             prefs.edit().putBoolean("firstrun", false).commit();
             startActivity(login);
         } else {
-            Intent report = new Intent(this, ReportActivity.class);
+            Intent report = new Intent(this, LoginActivity.class);
             startActivity(report);
         }
         finish();

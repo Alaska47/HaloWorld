@@ -20,7 +20,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,6 +31,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,15 +69,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    public String name;
-    public String phonenumber;
-    public String password;
+    public static String name;
+    public static String phonenumber;
+    public static String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
         mNameView = (AutoCompleteTextView) findViewById(R.id.fullname);
         populateAutoComplete();
 
@@ -206,16 +210,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isNameValid(String email) {
+    private boolean isNameValid(String name) {
         //TODO: Replace this with your own logic
-        return true;
+        for(int a = 0; a < name.length(); a++)
+        {
+            if(!Character.isLetter(name.charAt(a)) && !(name.charAt(a)+"").equals(" "))
+                return false;
+        }
+        if(name.indexOf(" ") == -1)
+            return false;
+        else
+            return true;
     }
 
     private boolean isPhoneNumberValid(String ph) {
         //TODO: Replace this with your own logic
-        //TelephonyManager tMgr = (TelephonyManager)mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
-        //String mPhoneNumber = tMgr.getLine1Number();
-        if (ph.length()==10)
+//        TelephonyManager tMgr = (TelephonyManager)mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
+//        String mPhoneNumber = tMgr.getLine1Number();
+        if (1==1)//(mPhoneNumber.equals(ph))
         {
             return true;
         }
@@ -356,6 +368,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
+                startActivity(i);
+                finish(); i = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(i);
                 finish();
             } else {

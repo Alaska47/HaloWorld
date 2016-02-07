@@ -7,19 +7,23 @@ import android.view.View;
 
 public class Question32Activity extends AppCompatActivity {
 
+    private String q2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question32);
+        q2 = getIntent().getExtras().getString("Q2");
     }
     public void nextY(View view) {
         Intent i = new Intent(Question32Activity.this, ConfirmActivity.class);
+        i.putExtra("Q3", q2+"1");
         startActivity(i);
         finish();
     }
 
     public void nextN(View view) {
         Intent i = new Intent(Question32Activity.this, ConfirmActivity.class);
+        i.putExtra("Q3", q2+"0");
         startActivity(i);
         finish();
     }

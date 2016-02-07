@@ -25,7 +25,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="20dp"
                 android:gravity="center" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="100sp" />
+                android:textSize="80sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,6 +65,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:text="Yes"
+                    android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
                     android:onClick="nextY"/>
@@ -81,6 +82,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:text="No"
+                    android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
                     android:onClick="nextN"/>

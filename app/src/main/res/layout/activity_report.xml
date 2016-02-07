@@ -13,17 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:shadowRadius="5"
-        android:shadowDy="0"
-        android:shadowDx="0"
-        android:shadowColor="#A83123"
         android:textSize="20sp"
-        android:background="#FF0000"
+        android:background="@drawable/emerstyle"
         android:textColor="#FFFFFF"
         android:text="Report an Emergency!"
         android:id="@+id/angry_btn"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="advance"/>
+        android:onClick="advance"
+        android:padding="30px" />
 
 </RelativeLayout>

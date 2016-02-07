@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="100sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,6 +68,12 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp" />
+
             <Button
                 android:id="@+id/save1"
                 style="?android:textAppearanceSmall"
@@ -75,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Save"
+                android:background="@drawable/buttonstyle"
                 android:onClick="save1"
                 android:textStyle="bold" />
 

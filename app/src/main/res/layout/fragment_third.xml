@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="90sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,49 +40,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:textSize="10sp" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="General Medical Care"
-                android:textSize="20sp"
-                android:id="@+id/woundCare"
-                android:layout_gravity="center_horizontal" />
+                android:paddingLeft="55sp"
+                android:orientation="vertical">
+                <CheckBox
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="General Medical Care"
+                    android:textSize="20sp"
+                    android:id="@+id/woundCare" />
 
 
-            <CheckBox
-                android:layout_width="wrap_content"
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heimlich"
+                    android:textSize="20sp"
+                    android:id="@+id/heimlich" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recovery Position"
+                    android:textSize="20sp"
+                    android:id="@+id/recoveryPosition" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CPR"
+                    android:textSize="20sp"
+                    android:id="@+id/cpr" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AED"
+                    android:textSize="20sp"
+                    android:id="@+id/aed" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Heimlich"
-                android:textSize="20sp"
-                android:id="@+id/heimlich"
-                android:layout_gravity="center_horizontal" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recovery Position"
-                android:textSize="20sp"
-                android:id="@+id/recoveryPosition"
-                android:layout_gravity="center_horizontal" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CPR"
-                android:textSize="20sp"
-                android:id="@+id/cpr"
-                android:layout_gravity="center_horizontal" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AED"
-                android:textSize="20sp"
-                android:id="@+id/aed"
-                android:layout_gravity="center_horizontal" />
-
+                android:gravity="center"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/save2"
@@ -91,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Save"
+                android:background="@drawable/buttonstyle"
                 android:onClick="save2"
                 android:textStyle="bold" />
 

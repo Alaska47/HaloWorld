@@ -33,7 +33,7 @@ public class StartUpActivity extends AppCompatActivity {
             prefs.edit().putBoolean("firstrun", false).commit();
             startActivity(login);
         } else {
-            Intent report = new Intent(this, LoginActivity.class);
+            Intent report = new Intent(this, ReportActivity.class);
             startActivity(report);
         }
         finish();

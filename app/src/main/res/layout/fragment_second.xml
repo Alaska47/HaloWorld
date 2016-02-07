@@ -8,14 +8,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mihir.haloworld.SecondFragment">
+    tools:context="com.example.mihir.haloworld.SecondFragment"
+    android:weightSum="1">
 
     <!-- Login progress -->
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="436dp"
+        android:layout_weight="0.18">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -34,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="30sp"
-                android:text="What are you?" />
+                android:text="Who are you?" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
-                    android:text="Plebian"
+                    android:text="Plebian*"
                     android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
@@ -74,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
-                    android:text="Angel"
+                    android:text="Angel**"
                     android:background="@drawable/buttonstyle"
                     android:textStyle="bold"
                     android:layout_weight=".5"
@@ -89,4 +91,10 @@
 
         </LinearLayout>
     </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="*Normal Person     **Medically Trained"
+        android:textSize="15sp" />
 </LinearLayout>

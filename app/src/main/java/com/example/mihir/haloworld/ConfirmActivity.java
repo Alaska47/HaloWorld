@@ -67,8 +67,7 @@ public class ConfirmActivity extends AppCompatActivity {
         Location location = locationManager.getLastKnownLocation(bestProvider);
 
         LatLng myPosition= new LatLng(location.getLatitude(), location.getLongitude());
-        if(myPosition ==null)
-        {
+        if(myPosition ==null) {
             myPosition = new LatLng(38.818487, -77.168534);
         }
 
@@ -78,7 +77,6 @@ public class ConfirmActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("ANISH", "7");
 
         PrintWriter out = null;
         try {

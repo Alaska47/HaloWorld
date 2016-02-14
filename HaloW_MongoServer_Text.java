@@ -31,8 +31,8 @@ import java.util.List;
 public class HaloW_MongoServer_Text
 {
     public static final int portNumber = 1337; // l33t, git gud
-    public static final String ACCOUNT_SID = "ACb31183fe784484bebe9367483ace63b0"; 
-    public static final String AUTH_TOKEN = "7766b99cee896727d84bcfd7c90ab5d1";   // CENSOR THESE FOR OPEN SOURCE CODE
+    public static final String ACCOUNT_SID = "ACb***************************b0"; 
+    public static final String AUTH_TOKEN = "77**************************8";   // CENSOR THESE FOR OPEN SOURCE CODE
 
     public static void main(String[] args) throws Exception {
         System.out.println("Initializing HaloW MongoServer...");
